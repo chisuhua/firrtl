@@ -39,6 +39,9 @@ lazy val commonSettings = Seq(
   scalacOptions := scalacOptionsVersion(scalaVersion.value) ++ Seq(
     "-deprecation",
     "-unchecked",
+    "-language:reflectiveCalls",
+    "-language:existentials",
+    "-language:implicitConversions",
     "-Yrangepos",          // required by SemanticDB compiler plugin
     "-Ywarn-unused-import" // required by `RemoveUnused` rule
   ),
@@ -149,6 +152,8 @@ lazy val docSettings = Seq(
     }
   },
   scalacOptions in Compile in doc ++= Seq(
+    "-Xfatal-warnings",
+    "-feature",
     "-diagrams",
     "-diagrams-max-classes", "25",
     "-doc-version", version.value,
